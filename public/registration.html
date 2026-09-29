@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Registration choice</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link href="css/cssExamples.css" rel="stylesheet" />
+    <script src="js/registration.js"></script>
+  </head>
+
+  <body>
+    <div class="register-container">
+      <header class="row">
+        <h2>Παρακαλώ επιλέξτε το είδος του χρήστη</h2>
+      </header>
+
+      <main class="row">
+        <div class="dropdown">
+          <label for="userType">Choose Form Below</label>
+          <div class="row">
+            <select id="userType">
+              <option value="" disabled selected></option>
+              <option value="./simple_user.html">Simple User</option>
+              <option value="./band_user.html">Band User</option>
+            </select>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

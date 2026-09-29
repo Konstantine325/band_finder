@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+
+    </head>
+        <title>Registration</title>
+        <!-- BootStrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+            <!-- CSS -->
+        <link href="css/band.css" rel="stylesheet"/>
+       
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" rel="stylesheet"/>
+
+        <meta name="Author" content="Konstantinos Prezerakos" />
+        <meta name="Description" content="This is registraton form" />
+        <meta name="keywords" lang="en-us" content="web programming hy-359, CSD, UOC" />
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+        <!-- responsive -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+    <body>
+        <div class="container">
+            <main class="row">
+                <h2>Band User Registration Form</h2>
+
+                <div class="col-6">
+                    <form class="band" id="band" onsubmit="return false;">
+                        <input type="hidden" name="type" value="band">
+                       <!-- username -->
+                       <label for="username">*Username</label>
+                       <input id="username" name="username" type="text" required
+                           placeholder="Username"
+                           pattern="^[A-Za-z][A-Za-z0-9]{5,}$" 
+                           title="Παρακαλώ εισάγετε τουλάχιστον 6 χαρακτήρες. Επιτρέπονται μόνο λατινικά γράμματα & αριθμοί."/>
+                           <div id="username-msg" class="field-msg"></div>
+                       <!-- email -->
+                       
+                       <label for="email">*Email</label>
+                       <input id="email" name="email" type="email" required
+                              placeholder="example@domain.com"
+                              title="Παρακαλώ εισάγετε έγκυρο email ."/>
+                              <div id="email-msg" class="field-msg"></div>
+                      <!-- password -->
+
+                      <label for="password" >*Κωδικός χρήστη</label>
+                      <div class="password-row ">
+                           <!-- pattern: 8-14 chars, τουλάχιστον 1 κεφαλαίο λατινικό, 1 ψηφίο, 1 σύμβολο -->
+                          
+                          
+                          <div class="input-wrapper position-relative">
+                              <button type="button" id="check-button"  style=" cursor: pointer;" onclick="Strength()">Check Strength</button>
+                              <input  id="password" name="password" type="password" required
+                                  pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[!@#\$%\^\&\*\(\)\_\+\-\=\[\]\{\}\;\'\:\\|\,\.\?]).{8,14}$"
+                                  title="Εισάγετε 8-14 χαρακτήρες, τουλάχιστον 1 κεφαλαίο λατινικό γράμμα, 1 αριθμός και 1 σύμβολο (π.χ. # $ %)."
+                                  />
+                                  <i  class="fa-solid fa-eye position-absolute"
+                                      id="toggle-pass"
+                                      style="right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"
+                                  
+                                  ></i>
+                          </div>
+                         
+                          <div class=" text-muted small" id="pass-message"></div>
+                      </div>
+
+
+
+                      <!-- επιβεβαίωση Password -->
+                      
+                      <label for="confirm_password">*Επιβεβαίωση κωδικού</label>
+                      <div class="password-row ">
+
+                          <div class="input-wrapper position-relative">
+                             
+                              <input id="confirm_password" name="confirm_password" type="password" required
+
+                                  pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[!@#\$%\^\&\*\(\)\_\+\-\=\[\]\{\}\;\'\:\\|\,\.\?]).{8,14}$"
+                                  title="Επανάλαβε τον κωδικό (8-14 chars, 1 κεφαλαίο, 1 αριθμός, 1 σύμβολο)." 
+                                  />
+                                   <!--mati -->
+                                  <i class="fa-solid fa-eye position-absolute" 
+                                     id="toggle-pass2"
+                                     style="right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"
+                                  ></i>
+                              
+
+                             
+                          </div>
+                          <div class=" text-muted small" id="confirm-pass-message"></div>
+
+                      </div>
+
+                        <!-- Όνομα Μπάντας -->
+                        <label for="band_name">*Όνομα Μπάντας </label>
+                        <input id="band_name" name="band_name" type="text" required
+                            pattern=".{3,30}" title="Γράφετε 3-30 χαρακτήρες."/>
+                
+                        <!-- Είδη Μουσικής -->
+                        <label for="music_genres">*Είδη Μουσικής </label>
+                        <input id="music_genres" name="music_genres" type="text" required
+                            pattern=".{3,200}" title="Γράφετε 3-200 χαρακτήρες."/>
+                
+                        <!-- Περιγραφή Μπάντας -->
+                        <label for="band_description">*Περιγραφή Μπάντας </label>
+                        <textarea id="band_description" name="band_description" rows="5" required
+                                minlength="3" maxlength="1000"
+                                title="Γράφετε 3-1000 χαρακτήρες."></textarea>
+                
+                        <!-- Αριθμός Μελών -->
+                        <label for="members_number">*Αριθμός Μελών </label>
+                        <input id="members_number" name="members_number" type="number" min="1" max="10" required
+                            title="Αριθμός Μελών από 1 έως 10."/>
+                
+                        <!-- Χρονιά Ίδρυσης -->
+                        <label for="foundedYear">*Χρονιά Ίδρυσης </label>
+                        <input id="foundedYear" name="foundedYear" type="number" min="1960" required
+                            title="Χρονιά από το 1960 και μετά."/>
+                
+                        <!-- Πόλη Μπάντας -->
+                        <label for="band_city">*Πόλη Μπάντας </label>
+                        <input id="band_city" name="band_city" type="text" required
+                            pattern="[A-Za-zΑ-Ωα-ω].{3,30}" title="Γράφετε 3-30 χαρακτήρες."/>
+                
+                        <!-- Τηλέφωνο -->
+                        <label for="telephone">*Τηλέφωνο </label>
+                        <input id="telephone" name="telephone" type="tel" required
+                            pattern="^\d{10,14}$" title="10 έως 14 ψηφία."/>
+                
+                        <!-- σελιδα -->
+                        <label for="webpage">Webpage Link</label>
+                        <input id="webpage" name="webpage" type="url"
+                            pattern="https?://.+" title="Εισάγετε έγκυρο http/https link."/>
+                
+                        <!-- φωτο -->
+                        <label for="photo">Photo Link </label>
+                        <input id="photo" name="photo" type="url"
+                            pattern="https?://.+" title="Εισάγετε έγκυρο http/https link."/>
+                
+                        <!-- Submit -->
+                        <button type="button" onclick="Strength(); printForm(event); BandRegisterPOST(event)">Εγγραφή</button>
+                    
+
+                        <h3>Tα πεδία με * είναι υποχρεωτικά</h3>
+                        
+                    </form>
+                </div>
+                <div id="finalMessage"></div>
+            </main>
+
+        </div>
+
+
+
+
+
+    </body>
+
+
+
+<!-- JS -->
+<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+<script src="js/band.js"></script>
+<script src="https://openlayers.org/api/OpenLayers.js"></script>
+<script src="js/ajax.js"></script>
+<script src="js/registerCheck.js"></script>
+
+
+
+</html>

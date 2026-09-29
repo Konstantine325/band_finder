@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <title>HY359 - Examples</title>
+
+    <script
+      type="text/javascript"
+      src="https://www.gstatic.com/charts/loader.js"
+    ></script>
+    <link rel="stylesheet" href="css/cssExamples.css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+   
+    <script src="js/ajax.js" defer></script>
+    <script src="js/index.js" defer></script>
+  </head>
+  <body>
+
+    <h1 style="text-align:center;">BAND FINDER</h1>
+  
+
+  
+   
+    <div style="text-align:center; margin-bottom:20px;">
+        <button onclick="showSection('home')">Home</button>
+        <button onclick="openLoginSection()">Login</button>
+        <button onclick="openProfileSection()">My Profile</button>
+        <button onclick="showSection('register')">Register</button>
+        <button onclick="openReviewsSection()">See Reviews</button>
+        <button onclick="openPublicEvents()">Public Events</button>
+        <button onclick="openPrivateEvents()">Private Events</button>
+        <button onclick="openMessages()">Messages</button>
+
+
+        
+    </div>
+  
+    
+  
+ 
+    <div id="content" style="padding:20px;">
+  
+      <div id="home" class="section">
+        <h2>Welcome to Band Finder application.</h2>
+      
+      </div>
+  
+      <div id="login" class="section" style="display:none;">
+
+        <h2>Login</h2>
+      
+        <label>Username:</label><br>
+        <input id="username"><br><br>
+      
+        <label>Password:</label><br>
+        <input id="password" type="password"><br><br>
+      
+        <button onclick="loginUser()">Login</button>
+        <button onclick="logoutUser()">Logout</button>
+      
+        <br><br>
+      
+       
+        <div id="loginArea"></div>
+      
+      </div>
+      
+      
+      
+  
+      <div id="register" class="section" style="display:none;">
+
+        <h2>Register</h2>
+      
+        <label>Choose user type:</label>
+      
+        <select id="registerType" onchange="loadRegisterForm()">
+          <option value="">-- select --</option>
+          <option value="simple">Simple User</option>
+          <option value="band">Band User</option>
+        </select>
+      
+        <br><br>
+      
+        <div id="registerFormArea"></div>
+      
+      </div>
+      
+      
+  
+      <div id="profile" class="section" style="display:none;">
+
+        <div id="profileArea"></div>
+       
+        <div id="bandReviewsArea"></div>
+        
+        <div id="adminReviewsArea"></div>
+        <hr>
+      </div>
+      
+   
+
+  
+      <div id="reviews" class="section" style="display:none;">
+        <label>rating from</label>
+        <input id="ratingFrom" type="number" min="1" max="5">
+        <label>to</label>
+  <input id="ratingTo" type="number" min="1" max="5">
+  <button onclick="filterReviews()">Filter</button>
+
+  <label>Music genre</label>
+  <select id="musicGenre">
+    <option value="">-- select genre --</option>
+  </select>
+  <button onclick="filterGenre()">Filter</button>
+  
+      
+        <hr>
+        <h2>Published Reviews</h2> 
+      
+        
+       <div id="reviewsArea"></div>     
+        
+      
+        <h3>Submit Review</h3>      
+       
+        <div id="reviewFormArea"></div>
+      </div>
+      
+      <div id="public_events" class="section" style="display:none;">
+        <h2>Public events</h2> 
+      
+        <hr>
+        <div id="eventsArea"></div>  
+        
+      </div>
+      <div id="private_events" class="section" style="display:none;">
+        <h2>Private Events</h2>
+        <hr>
+        <div id="privateEventsArea"></div>
+      </div>
+      
+      <div id="messages" class="section" style="display:none;">
+        <h2>Messages</h2>
+        <hr>
+        <div id="messagesArea"></div>
+      </div>
+  <!--SCRIPTSSSSSSSSSSSSSSSSSSSS-->
+    <script>
+        function showSection(id) {
+          const sections = document.getElementsByClassName("section");
+          for (let i = 0; i < sections.length; i++) {
+            sections[i].style.display = "none";
+          }
+          document.getElementById(id).style.display = "block";
+        }
+      
+        function loadRegisterForm() {
+          const type = document.getElementById("registerType").value;
+          const area = document.getElementById("registerFormArea");
+      
+          if (type === "simple") {
+            area.innerHTML =
+              '<iframe src="simple_user.html" width="100%" height="900px"></iframe>';
+          } 
+          else if (type === "band") {
+            area.innerHTML =
+              '<iframe src="band_user.html" width="100%" height="900px"></iframe>';
+          } 
+          else {
+            area.innerHTML = "";
+          }
+        }
+      
+        function openLoginSection() {
+          showSection('login');
+      
+         
+          const ajax = document.getElementById("ajaxContent");
+          const login = document.getElementById("login");
+      
+          if (ajax && login && !login.contains(ajax)) {
+            login.appendChild(ajax);
+          }
+        }
+      
+        function openProfileSection() {
+          showSection('profile');
+      
+         
+          const ajax = document.getElementById("ajaxContent");
+          const profile = document.getElementById("profileArea");
+      
+          if (ajax && profile) {
+            profile.appendChild(ajax);
+          }
+      
+          openMyProfile(); // από index.js
+        }
+      </script>
+      <script>
+        function loadReviews() {
+          const area = document.getElementById("reviewsArea");
+          area.innerHTML = "Loading reviews...";
+      
+          fetch("reviews/all")
+            .then(response => response.json())
+            .then(data => {
+              if (data.length === 0) {
+                area.innerHTML = "No reviews found.";
+                return;
+              }
+      
+              let html = "";
+      
+              for (let i = 0; i < data.length; i++) {
+                html += "<hr>";
+                html += "<p><b>Band:</b> " + data[i].band_name + "</p>";
+                html += "<p><b>Rating:</b> " + data[i].rating + "</p>";
+                html += "<p><b>Review:</b> " + data[i].review + "</p>";
+              }
+      
+              area.innerHTML = html;
+            })
+            .catch(err => {
+              area.innerHTML = "Error loading reviews";
+            });
+        }
+
+        function showReviewForm() {
+  fetch("/sessionUser")
+    .then(res => res.json())
+    .then(data => {
+      const area = document.getElementById("reviewFormArea");
+
+      if (!data.loggedIn) {
+        area.innerHTML = "<p>You must be logged in to submit a review.</p>";
+        return;
+      }
+
+      area.innerHTML = `
+        <label>Band name:</label><br>
+        <input id="reviewBand"><br><br>
+
+        <label>Rating (1-5):</label><br>
+        <input id="reviewRating" type="number" min="1" max="5"><br><br>
+
+        <label>Review:</label><br>
+        <textarea id="reviewText"></textarea><br><br>
+
+        <button onclick="submitReview()">Submit Review</button>
+
+        <div id="reviewMessage"></div>
+      `;
+    });
+}
+function openReviewsSection() {
+  showSection('reviews');
+  loadReviews();
+  showReviewForm();
+  loadGenres();
+}
+
+      </script>
+
+  
+  
+  </body>
+  </html>
+  
+</html>

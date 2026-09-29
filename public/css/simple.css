@@ -1,0 +1,153 @@
+body{
+ 
+  
+  text-align: center;
+  background-color: beige;
+  justify-content: center; 
+   justify-items: center;
+}
+
+.row{
+  width: 800px;
+  justify-content: center;
+  justify-items: center;
+}
+
+
+h3{
+  margin: 20px;
+  font-weight: 100;
+  font-size: medium;
+}
+
+form.simple {
+    width:auto;
+      display: flex;
+      /* justify-content: center;
+      justify-items: center; */
+      flex-direction: column; /*κάθετη στοίχιση*/
+      gap: 12px; 
+    }
+    
+    /*labels */
+    form.simple label {
+      font-weight: bold;
+      margin-top: 8px;
+    }
+    
+    /* input, select, textarea */
+    form.simple input,
+    form.simple select,
+    form.simple button {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    
+    /* gender choice radio */
+    form.simple fieldset {
+      border: none;
+      padding: 0;
+      margin: 8px 0;
+    }
+    form.simple legend {
+      font-weight: bold;
+      margin-bottom: 6px;
+  
+    }
+    form.simple label input[type="radio"] {
+      margin-right: 6px;
+    }
+    
+    /* Κουμπί submit */
+    form.simple button {
+      background: #0872e3;
+      margin-bottom: 20px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+  
+      transition: background 0.3s;
+    }
+    form.simple button:hover {
+      background: #0056b3;
+    }
+    
+    .password-row {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      width: 100%;
+      position: relative;
+    }
+    
+ 
+    .password-row .input-wrapper {
+      flex-grow: 1;
+      position: relative;
+    }
+    
+    .password-row input {
+      width: 100%;
+    }
+    
+ 
+    #pass-message {
+      position: absolute;
+      right: 0;
+      transform: translateX(150%); /* το messsaaage παει λίγο πιο δεξιά */
+      white-space: nowrap; /*ιδια γραμμή*/
+      font-size: 0.9rem;
+      color: #555;
+    }
+    
+    #confirm-pass-message {
+      position: absolute;
+      right: 0;
+      transform: translateX(110%); /* το messsaaage παει λίγο πιο δεξιά */
+      white-space: nowrap; /*ιδια γραμμή*/
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    #check-button{
+      width: auto;
+      position: absolute;
+      right: 0;
+      transform: translateX(-480%); 
+      white-space: nowrap; /*ιδια γραμμή*/
+      font-size: 0.9rem;
+      color: white
+    }
+
+    #address-button{
+      width: auto;
+      position: absolute;
+      right: 0;
+      transform: translateX(-500%); 
+      white-space: nowrap; /*ιδια γραμμή*/
+      font-size: 0.9rem;
+      color: white
+    }
+
+    .address-row {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      width: 100%;
+      position: relative;
+    }
+    
+ 
+    .address-row .input-wrapper {
+      flex-grow: 1;
+      position: relative;
+    }
+    
+    .address-row input {
+      width: 100%;
+    }
